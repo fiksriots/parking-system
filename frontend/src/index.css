@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-[#090a0f] text-zinc-100 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-400;
+  }
+}
+
+/* Premium Glassmorphism card utility */
+.glass {
+  background: rgba(18, 20, 32, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-glow-emerald {
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.glass-glow-amber {
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.glass-glow-rose {
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Simple keyframe for pulsing grid */
+@keyframes pulseGrid {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.3; }
+}
+
+.grid-bg {
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Print CSS formatting for Thermal 58mm POS Printer */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  /* Hide all dashboard chrome */
+  aside,
+  header,
+  .print\:hidden {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  #print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 58mm;
+    margin: 0;
+    padding: 5px;
+    background: white !important;
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 11px;
+    font-family: monospace;
+  }
+
+  #print-area * {
+    color: black !important;
+  }
+}
+
+/* ==========================================
+   LIGHT MODE STYLING OVERRIDES (PREMIUM SLEEK)
+   ========================================== */
+.light, .light body {
+  background-color: #f8fafc !important; /* slate-50 */
+  color: #0f172a !important; /* slate-900 */
+}
+
+/* Force override dark utility backgrounds to light slate/white */
+.light .bg-\[\#090a0f\],
+.light .bg-\[\#090a10\],
+.light .bg-\[\#0e101a\],
+.light main {
+  background-color: #f8fafc !important; /* slate-50 */
+}
+
+.light .bg-\[\#0b0c14\],
+.light .bg-\[\#121420\],
+.light .bg-\[\#0d0e15\],
+.light .bg-zinc-950,
+.light .bg-zinc-950\/80,
+.light aside,
+.light header {
+  background-color: #ffffff !important; /* pure white */
+}
+
+/* Card sub-panels (like simulator forms and tab bodies) */
+.light .bg-zinc-900\/20,
+.light .bg-zinc-900\/40,
+.light .bg-zinc-950\/20,
+.light .bg-zinc-950\/40,
+.light .bg-zinc-950\/50,
+.light .bg-zinc-900\/50,
+.light .bg-zinc-900,
+.light .bg-zinc-800 {
+  background-color: #f1f5f9 !important; /* slate-100 */
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(15, 23, 42, 0.06) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 2px 8px -1px rgba(15, 23, 42, 0.02) !important;
+}
+
+/* Text color corrections for light mode */
+.light .text-white,
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6,
+.light .font-bold.text-white {
+  color: #0f172a !important; /* slate-900 */
+}
+
+.light .text-zinc-300 {
+  color: #334155 !important; /* slate-700 */
+}
+
+.light .text-zinc-400 {
+  color: #475569 !important; /* slate-600 */
+}
+
+.light .text-zinc-500 {
+  color: #64748b !important; /* slate-500 */
+}
+
+/* Grid background color */
+.light .grid-bg {
+  background-image: linear-gradient(to right, rgba(15, 23, 42, 0.015) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(15, 23, 42, 0.015) 1px, transparent 1px) !important;
+}
+
+/* Borders */
+.light .border-white\/5,
+.light .border-white\/10,
+.light .border-dashed {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Nav links in light mode */
+.light aside nav button:not(.bg-emerald-500) {
+  color: #475569 !important;
+}
+.light aside nav button:not(.bg-emerald-500):hover {
+  background-color: rgba(15, 23, 42, 0.03) !important;
+  color: #0f172a !important;
+}
+
+/* Tables in light mode */
+.light table th {
+  background-color: rgba(15, 23, 42, 0.02) !important;
+  color: #475569 !important;
+  border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.light table td {
+  border-bottom-color: rgba(15, 23, 42, 0.04) !important;
+  color: #334155 !important;
+}
+
+.light table tr:hover {
+  background-color: rgba(15, 23, 42, 0.01) !important;
+}
+
+/* Core Form Inputs & Selects Override */
+.light input,
+.light select,
+.light textarea,
+.light input[type="text"],
+.light input[type="number"],
+.light input[type="password"] {
+  color: #0f172a !important; /* Slate-900 text */
+  background-color: #ffffff !important; /* White background */
+  border-color: rgba(15, 23, 42, 0.15) !important;
+}
+
+.light input::placeholder {
+  color: #94a3b8 !important; /* slate-400 */
+}
+
+.light input:focus, .light select:focus {
+  border-color: #10b981 !important; /* emerald-500 */
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Custom badges/states text corrections */
+.light .text-emerald-400 {
+  color: #059669 !important; /* emerald-600 */
+}
+.light .bg-emerald-500\/10 {
+  background-color: rgba(16, 185, 129, 0.08) !important;
+}
+
+.light .text-amber-400 {
+  color: #d97706 !important; /* amber-600 */
+}
+.light .bg-amber-500\/10 {
+  background-color: rgba(245, 158, 11, 0.08) !important;
+}
+
+.light .text-rose-400 {
+  color: #e11d48 !important; /* rose-600 */
+}
+.light .bg-rose-500\/10 {
+  background-color: rgba(244, 63, 94, 0.08) !important;
+}
+
+/* Active/Inactive Tab Buttons inside CashierBooth */
+.light button:not(.bg-emerald-500):not(.bg-amber-500):not(.bg-red-500):not(.bg-rose-500):not(.bg-zinc-800) {
+  color: #334155 !important;
+}
+.light button:not(.bg-emerald-500):not(.bg-amber-500):not(.bg-red-500):not(.bg-rose-500):hover {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Button hover overrides */
+.light .hover\:bg-zinc-800:hover {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+.light .hover\:bg-zinc-855:hover {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+.light .bg-zinc-800 {
+  background-color: #cbd5e1 !important; /* slate-300 */
+  color: #0f172a !important; /* slate-900 */
+}
+.light .bg-zinc-800:hover {
+  background-color: #94a3b8 !important; /* slate-400 */
+}
+
+
