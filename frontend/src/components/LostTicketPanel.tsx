@@ -43,7 +43,7 @@ export const LostTicketPanel: React.FC<LostTicketPanelProps> = ({ currentUser, g
 
   const fetchActiveCars = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/active-entries`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/reports/active-entries`);
       const data = await res.json();
       setActiveCars(data);
       if (data.length > 0) {
@@ -56,7 +56,7 @@ export const LostTicketPanel: React.FC<LostTicketPanelProps> = ({ currentUser, g
 
   const fetchTariff = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/payment/tariff`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/payment/tariff`);
       const data = await res.json();
       setFineAmount(data.lostTicketFine);
     } catch (e) {
@@ -75,7 +75,7 @@ export const LostTicketPanel: React.FC<LostTicketPanelProps> = ({ currentUser, g
     }
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/payment/lost-ticket`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/payment/lost-ticket`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

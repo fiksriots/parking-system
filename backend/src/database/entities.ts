@@ -11,10 +11,10 @@ export class User {
   @Column()
   passwordHash: string;
 
-  @Column({ type: 'text', default: 'cashier' }) // 'admin' | 'spv' | 'operator' | 'cashier'
+  @Column({ default: 'cashier' }) // 'admin' | 'spv' | 'operator' | 'cashier'
   role: string;
 
-  @Column({ type: 'text', default: '[]' })
+  @Column({ default: '[]' })
   permissions: string; // JSON string array of permissions
 
   @CreateDateColumn()
@@ -34,7 +34,7 @@ export class Member {
 
   // 'monthly' = member berbasis tanggal kadaluwarsa
   // 'quota'   = member berbasis jumlah masuk (kuota)
-  @Column({ type: 'text', default: 'monthly' })
+  @Column({ default: 'monthly' })
   memberType: string;
 
   // Used for monthly type
@@ -58,7 +58,7 @@ export class Member {
   @Column({ nullable: true })
   email: string;
 
-  @Column({ type: 'text', default: 'active' }) // 'active' | 'suspended' | 'expired'
+  @Column({ default: 'active' }) // 'active' | 'suspended' | 'expired'
   status: string;
 
   @CreateDateColumn()
@@ -88,7 +88,7 @@ export class ParkingEntry {
   @Column()
   gateId: string;
 
-  @Column({ type: 'text', default: 'daily' }) // 'daily' | 'member'
+  @Column({ default: 'daily' }) // 'daily' | 'member'
   type: string;
 
   @Column({ default: 'car' }) // 'car' | 'motorcycle' | 'truck'
@@ -133,7 +133,7 @@ export class Payment {
   @Column()
   paymentTime: Date;
 
-  @Column({ type: 'text', default: 'unpaid' }) // 'paid' | 'unpaid'
+  @Column({ default: 'unpaid' }) // 'paid' | 'unpaid'
   status: string;
 }
 
@@ -181,7 +181,7 @@ export class GateConfig {
   @Column({ default: 'rtsp://192.168.1.200/h264' })
   cctvIp: string;
 
-  @Column({ type: 'text', default: 'online' }) // 'online' | 'offline'
+  @Column({ default: 'online' }) // 'online' | 'offline'
   status: string;
 }
 
@@ -262,6 +262,6 @@ export class CashierShift {
   @Column({ type: 'float', default: 0 })
   discrepancy: number; // selisih setoran vs expected
 
-  @Column({ type: 'text', default: 'open' }) // 'open' | 'closed'
+  @Column({ default: 'open' }) // 'open' | 'closed'
   status: string;
 }

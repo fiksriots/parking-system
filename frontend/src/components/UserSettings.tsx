@@ -55,7 +55,7 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ currentUser }) => {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/users`);
       const data = await res.json();
       if (Array.isArray(data)) {
         setUsers(data);
@@ -87,7 +87,7 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ currentUser }) => {
     if (!username || !passwordHash) return;
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -126,7 +126,7 @@ export const UserSettings: React.FC<UserSettingsProps> = ({ currentUser }) => {
     if (!confirm(`Apakah Anda yakin ingin menghapus pengguna "${nameToDelete}"?`)) return;
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/users/${id}`, {
         method: 'DELETE',
       });
       const data = await res.json();

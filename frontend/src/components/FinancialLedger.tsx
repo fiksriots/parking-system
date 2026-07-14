@@ -48,7 +48,7 @@ export const FinancialLedger: React.FC = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/financial-ledger?startDate=${startDate}&endDate=${endDate}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/reports/financial-ledger?startDate=${startDate}&endDate=${endDate}`);
       if (res.ok) {
         setData(await res.json());
       } else {

@@ -183,7 +183,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
     if (!currentUser) return;
     setLoadingShift(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/shift/active/${currentUser.username}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/users/shift/active/${currentUser.username}`);
       if (res.ok) {
         const data = await res.json();
         if (data && data.id) {
@@ -205,7 +205,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
     if (!currentUser) return;
     setIsLoading(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/shift/open`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/users/shift/open`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -230,7 +230,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
   const loadShiftSummary = async () => {
     if (!activeShift) return;
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/shift/summary/${activeShift.id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/users/shift/summary/${activeShift.id}`);
       if (res.ok) {
         const data = await res.json();
         setShiftSummary(data);
@@ -246,7 +246,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
     if (!id) return;
     setLoadingShiftTx(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/shift/transactions/${id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/users/shift/transactions/${id}`);
       if (res.ok) {
         const data = await res.json();
         setShiftTransactions(Array.isArray(data) ? data : []);
@@ -262,7 +262,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
     if (!activeShift) return;
     setIsLoading(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/shift/close`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/users/shift/close`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -357,7 +357,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
 
   const fetchActiveCars = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/active-entries`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/reports/active-entries`);
       const data = await res.json();
       if (Array.isArray(data)) {
         setActiveCars(data);
@@ -369,7 +369,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
 
   const fetchMembers = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/members`);
       const data = await res.json();
       if (Array.isArray(data)) {
         setMembers(data);
@@ -384,7 +384,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
 
   const fetchTariff = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/payment/tariff`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/payment/tariff`);
       const data = await res.json();
       setFineAmount(data.lostTicketFine);
     } catch (e) {
@@ -522,7 +522,7 @@ export const CashierBooth: React.FC<CashierBoothProps> = ({ socket, gates, syste
       }
 
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/payment/lost-ticket`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/payment/lost-ticket`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

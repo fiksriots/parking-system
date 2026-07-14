@@ -1,0 +1,47 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: parking_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: parking_db
+      MYSQL_USER: parking_user
+      MYSQL_PASSWORD: parking_password
+      MYSQL_ROOT_PASSWORD: root_parking_pass
+    ports:
+      - '3307:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: parking_backend
+    restart: always
+    environment:
+      DB_TYPE: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: parking_user
+      DB_PASSWORD: parking_password
+      DB_NAME: parking_db
+      PORT: 3000
+    ports:
+      - '3001:3000'
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: parking_frontend
+    restart: always
+    ports:
+      - '8080:80'
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

@@ -46,3 +46,7 @@ coverage/
 
 # Package lock (opsional, hilangkan kalau mau track)
 # package-lock.json
+
+# Archive files
+*.zip
+

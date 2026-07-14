@@ -190,7 +190,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
 
   const fetchTariffConfig = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/payment/tariff`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/payment/tariff`);
       if (res.ok) {
         const data = await res.json();
         setTariffConfig({
@@ -250,7 +250,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
 
   const fetchMembers = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/members`);
       setMembers(await res.json());
     } catch (e) {
       console.error(e);
@@ -259,7 +259,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
 
   const fetchTransactions = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members/transactions/rekap`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/members/transactions/rekap`);
       if (res.ok) {
         setTransactions(await res.json());
       }
@@ -297,7 +297,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
     setSaving(true);
     try {
       const isEdit = !!editingId;
-      const url = isEdit ? `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members/${editingId}` : `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members`;
+      const url = isEdit ? `${import.meta.env.VITE_API_URL || window.location.origin}/api/members/${editingId}` : `${import.meta.env.VITE_API_URL || window.location.origin}/api/members`;
       const method = isEdit ? 'PUT' : 'POST';
 
       const payload = {
@@ -341,7 +341,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
 
   const handleDelete = async (id: string) => {
     if (!confirm('Hapus member ini? Data tidak dapat dikembalikan.')) return;
-    await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members/${id}`, { method: 'DELETE' });
+    await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/members/${id}`, { method: 'DELETE' });
     fetchMembers();
     fetchTransactions();
   };
@@ -349,7 +349,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
   const handleTopupSubmit = async (id: string) => {
     if (topupAmount <= 0) return;
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members/${id}/topup-quota`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/members/${id}/topup-quota`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -374,7 +374,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
     if (renewMonths <= 0) return;
     setRenewMessage('');
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members/${id}/renew`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/members/${id}/renew`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -406,7 +406,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
     if (!targetMember) return;
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/members/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -463,7 +463,7 @@ export const MemberManager: React.FC<MemberManagerProps> = ({ initialMode = 'man
 
     // Also trigger physical network print if on production
     try {
-      const settingsRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/gates/settings`);
+      const settingsRes = await fetch(`${import.meta.env.VITE_API_URL || window.location.origin}/api/gates/settings`);
       if (settingsRes.ok) {
         const settings = await settingsRes.json();
         if (settings.systemMode === 'production') {
