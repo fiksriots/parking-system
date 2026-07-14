@@ -104,7 +104,7 @@ export const HardwareSimulator: React.FC<HardwareSimulatorProps> = ({ socket, ga
 
   const fetchMembers = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/members');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/members`);
       const data = await res.json();
       setMembers(data);
       if (data.length > 0 && !selectedRfid) {
@@ -117,7 +117,7 @@ export const HardwareSimulator: React.FC<HardwareSimulatorProps> = ({ socket, ga
 
   const fetchActiveCars = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/reports/active-entries');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/active-entries`);
       const data = await res.json();
       setActiveCars(data);
     } catch (e) {

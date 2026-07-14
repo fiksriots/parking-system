@@ -71,7 +71,7 @@ export const TariffConfig: React.FC = () => {
 
   const fetchTariff = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/payment/tariff');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/payment/tariff`);
       const data = await res.json();
       setTariffs({
         car:        mergeVehicle(data.car,        DEFAULT_TARIFFS.car),
@@ -109,7 +109,7 @@ export const TariffConfig: React.FC = () => {
     e.preventDefault();
     setMessage(''); setError(''); setSaving(true);
     try {
-      const res = await fetch('http://localhost:3000/api/payment/tariff', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/payment/tariff`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...tariffs, gracePeriodMins: Number(gracePeriodMins) }),

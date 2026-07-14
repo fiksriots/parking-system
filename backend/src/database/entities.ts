@@ -38,7 +38,7 @@ export class Member {
   memberType: string;
 
   // Used for monthly type
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   expiryDate: Date;
 
   // Used for quota type
@@ -79,7 +79,7 @@ export class ParkingEntry {
   @Column()
   plateNumber: string;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   entryTime: Date;
 
   @Column({ type: 'text', nullable: true })
@@ -106,7 +106,7 @@ export class ParkingExit {
   @Column()
   entryId: string;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   exitTime: Date;
 
   @Column({ type: 'text', nullable: true })
@@ -130,7 +130,7 @@ export class Payment {
   @Column()
   paymentMethod: string; // 'cash' | 'qris' | 'member'
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   paymentTime: Date;
 
   @Column({ type: 'text', default: 'unpaid' }) // 'paid' | 'unpaid'
@@ -157,7 +157,7 @@ export class LostTicket {
   @Column()
   operatorId: string;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   approvedAt: Date;
 }
 
@@ -196,7 +196,7 @@ export class AuditLog {
   @Column()
   action: string;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   timestamp: Date;
 
   @Column({ type: 'text', nullable: true })
@@ -241,10 +241,10 @@ export class CashierShift {
   @Column()
   operatorUsername: string;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   openTime: Date;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   closeTime: Date;
 
   @Column({ type: 'float', default: 0 })

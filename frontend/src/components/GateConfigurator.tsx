@@ -47,7 +47,7 @@ export const GateConfigurator: React.FC<GateConfiguratorProps> = ({
 
   const fetchSettings = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/gates/settings');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/gates/settings`);
       if (res.ok) {
         const data = await res.json();
         setOpPrinterIp(data.operatorPrinterIp || '192.168.1.150');
@@ -59,7 +59,7 @@ export const GateConfigurator: React.FC<GateConfiguratorProps> = ({
 
   const handleSaveSettings = async (mode: 'simulation' | 'production', printerIpVal: string) => {
     try {
-      const res = await fetch('http://localhost:3000/api/gates/settings', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/gates/settings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ systemMode: mode, operatorPrinterIp: printerIpVal }),
@@ -85,7 +85,7 @@ export const GateConfigurator: React.FC<GateConfiguratorProps> = ({
     if (!name || !ipAddress) return;
 
     try {
-      const res = await fetch('http://localhost:3000/api/gates', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/gates`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, type, ipAddress, printerIp, cctvIp, status }),
@@ -103,7 +103,7 @@ export const GateConfigurator: React.FC<GateConfiguratorProps> = ({
 
   const handleUpdate = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/gates/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/gates/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, type, ipAddress, printerIp, cctvIp, status }),
@@ -122,7 +122,7 @@ export const GateConfigurator: React.FC<GateConfiguratorProps> = ({
   const handleDelete = async (id: string) => {
     if (!confirm('Apakah Anda yakin ingin menghapus gate ini?')) return;
     try {
-      const res = await fetch(`http://localhost:3000/api/gates/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/gates/${id}`, {
         method: 'DELETE',
       });
       if (res.ok) {

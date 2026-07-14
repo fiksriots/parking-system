@@ -12,8 +12,15 @@ import { User, Member, ParkingEntry, ParkingExit, Payment, LostTicket, GateConfi
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'better-sqlite3' as any,
-      database: 'database.sqlite',
+      type: process.env.DATABASE_URL ? 'postgres' : ('better-sqlite3' as any),
+      ...(process.env.DATABASE_URL
+        ? {
+            url: process.env.DATABASE_URL,
+            ssl: { rejectUnauthorized: false },
+          }
+        : {
+            database: 'database.sqlite',
+          }),
       entities: [
         User,
         Member,

@@ -30,7 +30,7 @@ import { AuditLogsList } from './components/AuditLogsList';
 import { FinancialLedger } from './components/FinancialLedger';
 
 // Establish Socket.IO Connection
-const socket = io('http://localhost:3000', {
+const socket = io(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}`, {
   autoConnect: true,
   reconnection: true,
 });
@@ -193,7 +193,7 @@ export default function App() {
 
   const fetchGates = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/gates');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/gates`);
       const data = await res.json();
       if (Array.isArray(data)) {
         setGates(data);
@@ -205,7 +205,7 @@ export default function App() {
 
   const fetchSystemMode = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/gates/settings');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/gates/settings`);
       if (res.ok) {
         const data = await res.json();
         setSystemMode(data.systemMode || 'simulation');
@@ -217,7 +217,7 @@ export default function App() {
 
   const fetchStats = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/reports/stats');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/stats`);
       const data = await res.json();
       setStats(data);
     } catch (e) {
@@ -230,7 +230,7 @@ export default function App() {
     setLoginError('');
 
     try {
-      const res = await fetch('http://localhost:3000/api/users/login', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -257,7 +257,7 @@ export default function App() {
   const handleLogout = async () => {
     if (currentUser) {
       try {
-        await fetch('http://localhost:3000/api/users/logout', {
+        await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/users/logout`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

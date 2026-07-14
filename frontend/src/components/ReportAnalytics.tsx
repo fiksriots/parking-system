@@ -27,17 +27,17 @@ export const ReportAnalytics: React.FC = () => {
     setLoading(true);
     try {
       // 1. Fetch stats
-      const statsRes = await fetch('http://localhost:3000/api/reports/stats');
+      const statsRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/stats`);
       const statsData = await statsRes.json();
       setStats(statsData);
 
       // 2. Fetch hourly stats
-      const hourlyRes = await fetch('http://localhost:3000/api/reports/hourly-stats');
+      const hourlyRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/hourly-stats`);
       const hourlyData = await hourlyRes.json();
       setHourlyData(hourlyData);
 
       // 3. Fetch recent logs
-      const logsRes = await fetch('http://localhost:3000/api/reports/recent-logs');
+      const logsRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/recent-logs`);
       const logsData = await logsRes.json();
       setRecentLogs(logsData);
     } catch (e) {

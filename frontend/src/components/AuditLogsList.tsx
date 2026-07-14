@@ -20,7 +20,7 @@ export const AuditLogsList: React.FC = () => {
   const fetchLogs = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3000/api/reports/audit-logs');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/reports/audit-logs`);
       const data = await res.json();
       if (Array.isArray(data)) {
         setLogs(data);
