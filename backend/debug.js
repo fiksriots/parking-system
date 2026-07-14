@@ -1,28 +1,30 @@
 const fs = require('fs');
 const path = require('path');
 
-// Buat stream untuk menulis log ke file debug_error.log
 const logPath = path.join(__dirname, 'debug_error.log');
-const logStream = fs.createWriteStream(logPath, { flags: 'w' });
+
+// Bersihkan log saat start
+try {
+  fs.writeFileSync(logPath, '');
+} catch (e) {}
 
 function writeToLog(type, message) {
-  const timestamp = new Date().toISOString();
-  logStream.write(`[${timestamp}] [${type}] ${message}\n`);
+  try {
+    const timestamp = new Date().toISOString();
+    fs.appendFileSync(logPath, `[${timestamp}] [${type}] ${message}\n`);
+  } catch (e) {}
 }
 
-// Tangkap uncaught exceptions (error yang membuat aplikasi crash)
+// Tangkap exceptions
 process.on('uncaughtException', (err) => {
   writeToLog('CRITICAL_EXCEPTION', err.stack || err.message);
-  logStream.end(() => {
-    process.exit(1);
-  });
+  process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
   writeToLog('UNHANDLED_REJECTION', reason instanceof Error ? reason.stack : String(reason));
 });
 
-// Override console.log dan console.error bawaan Node.js
 const originalLog = console.log;
 const originalError = console.error;
 
@@ -38,11 +40,11 @@ console.error = function(...args) {
   originalError.apply(console, args);
 };
 
-writeToLog('SYSTEM', 'Starting application via debug wrapper...');
+writeToLog('SYSTEM', 'Starting application via debug wrapper (Sync)...');
 
-// Load file utama NestJS
 try {
   require('./dist/main.js');
+  writeToLog('SYSTEM', 'Required main.js successfully.');
 } catch (err) {
   writeToLog('REQUIRE_ERROR', err.stack || err.message);
 }
