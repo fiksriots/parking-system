@@ -13,10 +13,9 @@ async function bootstrap() {
   isInitialized = true;
 }
 
-// Check if running in a persistent server environment (cPanel/VPS/Local)
-const port = process.env.PORT || (process.env.NODE_ENV !== 'production' && !process.env.VERCEL ? 3000 : null);
-
-if (port) {
+// If not running on Vercel, boot NestJS as a standard persistent server (cPanel/VPS/Local)
+if (!process.env.VERCEL) {
+  const port = process.env.PORT || 3000;
   const startServer = async () => {
     const app = await NestFactory.create(AppModule);
     app.enableCors();
