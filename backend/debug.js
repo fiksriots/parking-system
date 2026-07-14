@@ -42,6 +42,12 @@ console.error = function(...args) {
 
 writeToLog('SYSTEM', 'Starting application via debug wrapper (Sync)...');
 
+// Log environment variables
+writeToLog('ENV_PORT', String(process.env.PORT));
+writeToLog('ENV_NODE_ENV', String(process.env.NODE_ENV));
+writeToLog('ENV_PASSENGER', String(process.env.PASSENGER_APP_ENV));
+writeToLog('ENV_VERCEL', String(process.env.VERCEL));
+
 try {
   require('./dist/main.js');
   writeToLog('SYSTEM', 'Required main.js successfully.');
