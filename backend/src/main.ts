@@ -13,15 +13,17 @@ async function bootstrap() {
   isInitialized = true;
 }
 
-// Local development support
-if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
-  const localBootstrap = async () => {
+// Check if running in a persistent server environment (cPanel/VPS/Local)
+const port = process.env.PORT || (process.env.NODE_ENV !== 'production' && !process.env.VERCEL ? 3000 : null);
+
+if (port) {
+  const startServer = async () => {
     const app = await NestFactory.create(AppModule);
     app.enableCors();
-    await app.listen(3000);
-    console.log(`Backend API is running on: http://localhost:3000`);
+    await app.listen(port);
+    console.log(`Backend API is running on port: ${port}`);
   };
-  localBootstrap();
+  startServer();
 }
 
 export default async (req: any, res: any) => {
